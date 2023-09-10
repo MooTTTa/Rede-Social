@@ -20,5 +20,4 @@ public class PostController {
         postService.insert(postDTO);
     }
 
-
 }

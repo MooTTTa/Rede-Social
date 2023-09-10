@@ -1,5 +1,6 @@
 package com.redesocial.RedeSocial.controller;
 
+import com.redesocial.RedeSocial.domain.Post;
 import com.redesocial.RedeSocial.domain.User;
 import com.redesocial.RedeSocial.dto.UserDTO;
 import com.redesocial.RedeSocial.service.UserService;
@@ -25,6 +26,12 @@ public class UserController {
 
     @GetMapping("{id}")
     public User findById(@PathVariable Long id){ return userService.findById(id); }
+
+    @GetMapping("{id}/posts")
+    public List<Post> findPosts(@PathVariable Long id){
+        User user = userService.findById(id);
+        return user.getPosts();
+    }
 
     @PostMapping
     public ResponseEntity<User> insert(@RequestBody UserDTO userDTO){
