@@ -1,6 +1,7 @@
 package com.redesocial.RedeSocial.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,5 +26,6 @@ public class Post implements Serializable {
     private Date data;
     private String title;
     private String body;
+    @JsonIgnore
     private User author;
 }

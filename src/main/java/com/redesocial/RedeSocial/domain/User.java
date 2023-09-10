@@ -1,14 +1,19 @@
 package com.redesocial.RedeSocial.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -23,16 +28,12 @@ public class User implements Serializable {
     private String name;
     private String email;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(id, user.id);
-    }
+    @DBRef(lazy = true)//carrega os posts se eu somente ascesalos
+    private List<Post> posts =  new ArrayList<>();
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
+    public User(Long id, String name, String email) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
     }
 }
