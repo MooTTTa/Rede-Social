@@ -7,10 +7,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
+import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 @Getter
@@ -22,10 +26,21 @@ public class Post implements Serializable {
 
     @Id
     private Long id;
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    private Date data;
+    private Instant data;
     private String title;
     private String body;
     @JsonIgnore
     private User author;
+
+
+    @DBRef(lazy = true)//carrega os posts se eu somente ascesalos
+    private List<Coment> coments = new ArrayList<>();
+
+    public Post(Long id, Instant data, String title, String body, User author) {
+        this.id = id;
+        this.data = data;
+        this.title = title;
+        this.body = body;
+        this.author = author;
+    }
 }

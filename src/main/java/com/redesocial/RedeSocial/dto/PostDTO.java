@@ -1,6 +1,7 @@
 package com.redesocial.RedeSocial.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.redesocial.RedeSocial.domain.User;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -11,6 +12,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Date;
 
 
@@ -22,9 +24,7 @@ public class PostDTO implements Serializable {
 
     @NotNull
     private Long id;
-    @NotNull
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    private Date data;
+    private Instant data;
     @NotNull
     private String title;
     @NotNull
