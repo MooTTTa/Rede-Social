@@ -33,7 +33,7 @@ public class Post implements Serializable {
     private User author;
 
 
-    @DBRef(lazy = true)//carrega os posts se eu somente ascesalos
+    @DBRef(lazy = true)//carrega os posts se eu somente acessados
     private List<Coment> coments = new ArrayList<>();
 
     public Post(Long id, Instant data, String title, String body, User author) {
